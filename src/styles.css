@@ -103,8 +103,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     background-image:
-      radial-gradient(circle at 15% 10%, oklch(0.82 0.19 155 / 8%), transparent 45%),
-      radial-gradient(circle at 85% 90%, oklch(0.75 0.15 200 / 6%), transparent 40%);
+      radial-gradient(ellipse 80% 60% at 50% -10%, oklch(0.765 0.145 158 / 4%), transparent 60%);
     background-attachment: fixed;
   }
   .font-mono, code, kbd, samp { font-family: var(--font-mono); }
