@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
 import {
   Area,
-  AreaChart,
   CartesianGrid,
+  ComposedChart,
   Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -76,9 +75,9 @@ export function SalesChart() {
         </div>
       </div>
 
-      <div className="mt-4 flex-1">
+      <div className="mt-4 flex-1 min-h-[280px]">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 8, right: 16, bottom: 0, left: -12 }}>
+          <ComposedChart data={data} margin={{ top: 8, right: 16, bottom: 0, left: -12 }}>
             <defs>
               <linearGradient id="salesFill" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="var(--accent-emerald)" stopOpacity={0.35} />
@@ -101,7 +100,12 @@ export function SalesChart() {
               tickFormatter={(v) => `${Math.round(v / 1000)}k`}
             />
             <Tooltip
-              cursor={{ stroke: "var(--accent-emerald)", strokeWidth: 1, strokeDasharray: "4 4", strokeOpacity: 0.4 }}
+              cursor={{
+                stroke: "var(--accent-emerald)",
+                strokeWidth: 1,
+                strokeDasharray: "4 4",
+                strokeOpacity: 0.4,
+              }}
               content={<ChartTooltip />}
             />
             <Area
@@ -112,27 +116,39 @@ export function SalesChart() {
               isAnimationActive
               animationDuration={1400}
             />
-          </AreaChart>
+            <Line
+              type="monotone"
+              dataKey="sales"
+              stroke="var(--accent-emerald)"
+              strokeWidth={2.5}
+              dot={{ r: 3, fill: "var(--background)", stroke: "var(--accent-emerald)", strokeWidth: 2 }}
+              activeDot={{ r: 6, fill: "var(--accent-emerald)", stroke: "var(--background)", strokeWidth: 2 }}
+              className="flow-line"
+              isAnimationActive
+              animationDuration={1400}
+            />
+          </ComposedChart>
         </ResponsiveContainer>
+      </div>
 
-        {/* Overlaid animated flow line */}
-        <div className="pointer-events-none -mt-full h-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data} margin={{ top: 8, right: 16, bottom: 0, left: -12 }}>
-              <XAxis dataKey="day" hide />
-              <YAxis hide />
-              <Line
-                type="monotone"
-                dataKey="sales"
-                stroke="var(--accent-emerald)"
-                strokeWidth={2.5}
-                dot={{ r: 3, fill: "var(--background)", stroke: "var(--accent-emerald)", strokeWidth: 2 }}
-                activeDot={{ r: 5, fill: "var(--accent-emerald)", stroke: "var(--background)", strokeWidth: 2 }}
-                className="flow-line"
-                isAnimationActive={false}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+      <div className="mt-4 grid grid-cols-3 gap-3 border-t border-white/5 pt-4 text-xs">
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            周环比
+          </div>
+          <div className="mt-1 font-mono text-emerald">▲ 18.6%</div>
+        </div>
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            峰值日
+          </div>
+          <div className="mt-1 font-mono text-foreground">周六 · 29.8w</div>
+        </div>
+        <div>
+          <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            均值
+          </div>
+          <div className="mt-1 font-mono text-foreground">¥202,000</div>
         </div>
       </div>
     </div>
