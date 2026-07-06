@@ -110,12 +110,12 @@
 }
 
 @utility glass-card {
-  background: color-mix(in oklab, var(--card) 70%, transparent);
-  backdrop-filter: blur(16px) saturate(140%);
+  background: color-mix(in oklab, var(--card) 60%, transparent);
+  backdrop-filter: blur(12px) saturate(120%);
   border: 1px solid var(--color-border);
   box-shadow:
-    0 1px 0 0 oklch(1 0 0 / 4%) inset,
-    0 20px 40px -20px oklch(0 0 0 / 60%);
+    0 1px 0 0 oklch(1 0 0 / 3%) inset,
+    0 8px 24px -12px oklch(0 0 0 / 50%);
 }
 
 @utility glow-emerald {
